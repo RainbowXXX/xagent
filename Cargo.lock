@@ -421,6 +421,7 @@ dependencies = [
  "clap",
  "dirs",
  "serde",
+ "thiserror",
  "tokio",
  "toml",
 ]

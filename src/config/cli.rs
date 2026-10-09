@@ -1,27 +1,28 @@
+use clap::{Parser, Subcommand};
 use std::path::PathBuf;
-use clap::{Subcommand, Parser};
 
-pub(crate) const DEFAULT_CONFIG_DIR: &'static str = ".xagent";
-pub(crate) const DEFAULT_CONFIG_FILE: &'static str = "config.toml";
+pub const DEFAULT_CONFIG_DIR: &str = ".xagent";
+pub const DEFAULT_CONFIG_FILE: &str = "config.toml";
 
 #[derive(Parser)]
-pub(crate) struct Cli {
+pub struct Cli {
     #[arg(short, long)]
-    pub(crate) verbose: bool,
+    pub verbose: bool,
     #[arg(short, long)]
-    pub(crate) config: Option<PathBuf>,
+    pub config: Option<PathBuf>,
+
+    #[arg(long)]
+    pub model: Option<String>,
 
     #[clap(subcommand)]
-    pub(crate) sub_command: SubCommand,
+    pub sub_command: Option<SubCommand>,
 }
 
 #[derive(Subcommand)]
-pub(crate) enum SubCommand {
-
-}
+pub enum SubCommand {}
 
 impl Cli {
-    pub(crate) fn load() -> Self {
+    pub fn load() -> Self {
         Self::parse()
     }
 }
